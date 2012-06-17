@@ -1,4 +1,4 @@
 SpleefUltimate
 ==============
 
-Yet another amazing spleen plugin
+Yet another amazing spleenf plugin
