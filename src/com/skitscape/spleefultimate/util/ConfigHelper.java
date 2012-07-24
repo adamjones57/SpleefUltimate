@@ -1,4 +1,4 @@
-package com.spleefultimate.util;
+package com.skitscape.spleefultimate.util;
 
 import java.util.UUID;
 import org.bukkit.Bukkit;

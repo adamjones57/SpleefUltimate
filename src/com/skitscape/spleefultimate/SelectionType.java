@@ -1,12 +1,10 @@
 package com.skitscape.spleefultimate;
 
-public enum SelectionType {
+public enum SelectionType
+{
+  CUBOID, 
 
+  OUTLINE, 
 
-	  CUBOID, 
-
-	  OUTLINE, 
-
-	  WALLS;
-	}
-
+  WALLS;
+}

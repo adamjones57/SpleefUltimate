@@ -9,9 +9,9 @@ import org.bukkit.configuration.ConfigurationSection;
 
 public class Messages
 {
-  private static HashMap<String, String> messages = new HashMap<String, String>();
+  private static HashMap<String, String> messages_ = new HashMap<String, String>();
 
-  private static HashMap<String, String> defaultMessages = createDefaultMessages();
+  private static HashMap<String, String> defaultMessages_ = createDefaultMessages();
 
   private static HashMap<String, String> createDefaultMessages()
   {
@@ -111,12 +111,12 @@ public class Messages
 
   public static String getMessage(String id)
   {
-    if (messages.containsKey(id)) {
-      return (String)messages.get(id);
+    if (messages_.containsKey(id)) {
+      return (String)messages_.get(id);
     }
 
-    if (defaultMessages.containsKey(id)) {
-      return (String)defaultMessages.get(id);
+    if (defaultMessages_.containsKey(id)) {
+      return (String)defaultMessages_.get(id);
     }
 
     return "";
@@ -134,8 +134,8 @@ public class Messages
     }
     for (String id : keys)
     {
-      if (defaultMessages.containsKey(id))
-        messages.put(id, parentSection.getString(id));
+      if (defaultMessages_.containsKey(id))
+        messages_.put(id, parentSection.getString(id));
     }
   }
 
@@ -145,21 +145,21 @@ public class Messages
       return;
     }
 
-    Vector<String> messageIds = new Vector<String>();
-    messageIds.addAll(defaultMessages.keySet());
+    Vector messageIds = new Vector();
+    messageIds.addAll(defaultMessages_.keySet());
     Collections.sort(messageIds);
 
     for (int i = 0; i < messageIds.size(); i++)
     {
       String id = (String)messageIds.get(i);
 
-      if (messages.containsKey(id))
+      if (messages_.containsKey(id))
       {
-        parentSection.set(id, messages.get(id));
+        parentSection.set(id, messages_.get(id));
       }
       else
       {
-        parentSection.set(id, defaultMessages.get(id));
+        parentSection.set(id, defaultMessages_.get(id));
       }
     }
   }

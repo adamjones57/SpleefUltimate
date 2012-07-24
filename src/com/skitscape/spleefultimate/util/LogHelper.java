@@ -1,11 +1,11 @@
-package com.spleefultimate.util;
+package com.skitscape.spleefultimate.util;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LogHelper
 {
-  private static final Logger logger = Logger.getLogger("Minecraft");
+  private static final Logger _logger = Logger.getLogger("Minecraft");
 
   public static void log(String logString)
   {
@@ -14,6 +14,6 @@ public class LogHelper
 
   public static void log(String logString, Level level)
   {
-    logger.log(level, "[SpleefExtreme] " + logString);
+    _logger.log(level, "[SpleefExtreme] " + logString);
   }
 }

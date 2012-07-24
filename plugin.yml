@@ -1,0 +1,119 @@
+name: SpleefUltimate
+main: com.skitscape.spleefultimate.SpleefUltimate
+version: 1.2.5
+dev-url: http://spleefultimate.net/
+author: SyntaxBlitz
+website: http://www.spleefultimate.net/
+description: Spleef plugin with the ability to create complex, multi-regional Spleef playing fields
+commands: 
+  spleef: 
+    description: Accesses the functionality of spleefultimate
+    usage: /<command> <subcommand> (arguments)
+permissions: 
+    spleefultimate.player.*: 
+        description: Allows person to do join and leave spleef as well as warp to the spectate points.
+        children:
+            spleefultimate.player.play: true
+    spleefultimate.admin.*: 
+        description: Allows to add and remove Spleef games and edit their properties and teleportation points
+        children:
+            spleefultimate.admin.addgame: true
+            spleefultimate.admin.removegame: true
+            spleefultimate.admin.removetp: true
+            spleefultimate.admin.renamegame: true
+            spleefultimate.admin.setjoincost: true
+            spleefultimate.admin.setmaxplayers: true
+            spleefultimate.admin.setreward: true
+            spleefultimate.admin.settp: true
+    spleefultimate.admin.addgame: 
+      description: Allows to add Spleef games
+    spleefultimate.admin.removegame: 
+      description: Allows to remove Spleef games
+    spleefultimate.admin.removetp: 
+      description: Allows to remove teleportation points
+    spleefultimate.admin.renamegame: 
+      description: Allows to rename Spleef games
+    spleefultimate.admin.setjoincost: 
+      description: Allows to set a game's join cost
+    spleefultimate.admin.setmaxplayers: 
+      description: Allows to set a game's maximum player number
+    spleefultimate.admin.setreward: 
+      description: Allows to set a game's reward
+    spleefultimate.admin.settp: 
+      description: Allows to set teleportation points
+    spleefultimate.admin.*: 
+        description: Allows to select, add and remove Spleef game regions
+        children:
+            spleefultimate.admin.addignoredregion: true
+            spleefultimate.admin.addloseregion: true
+            spleefultimate.admin.addspleefregion: true
+            spleefultimate.admin.removeignoredregion: true
+            spleefultimate.admin.removeloseregion: true
+            spleefultimate.admin.removespleefregion: true
+            spleefultimate.admin.wand: true
+    spleefultimate.admin.addignoredregion: 
+        description: Allows to add an ignored region to a game
+    spleefultimate.admin.addloseregion: 
+        description: Allows to add a lose region to a game
+    spleefultimate.admin.addspleefregion: 
+        description: Allows to add a Spleef region to a game
+    spleefultimate.admin.removeignoredregion: 
+        description: Allows to remove an ignored region from a game
+    spleefultimate.admin.removeloseregion: 
+        description: Allows to remove a lose region from a game
+    spleefultimate.admin.removespleefregion: 
+        description: Allows to remove a Spleef region from a game
+    spleefultimate.admin.wand: 
+        description: Allows to get a wand and set its type
+    spleefultimate.admin.enable:
+        description: Allows to enable an arena
+    spleefultimate.admin.disable:
+        description: Allows to disable an arena
+    spleefultimate.freejoin: 
+        description: Allows to join every Spleef game at no cost
+    spleefultimate.mod.kick: 
+        description: Allows to kick a player from a Spleef game
+    spleefultimate.player.play: 
+        description: Allows to join and leave a Spleef game
+        default: true
+    spleefultimate.mod.reset: 
+        description: Allows to reset a Spleef arena
+    spleefultimate.player.return: 
+        description: Allows to return to the previous location (before teleportation)
+        default: true
+    spleefultimate.admin.save: 
+        description: Allows to save all Spleef games
+    spleefultimate.player.spectate: 
+        description: Allows to spectate Spleef games
+        default: true
+    spleefultimate.mod.start: 
+        description: Allows to start a Spleef game
+    spleefultimate.mod.start.single: 
+        description: Allows to start a Spleef game without any other players
+    spleefultimate.mod.stop: 
+        description: Allows to stop a Spleef game        
+    spleefultimate.mod.*: 
+        description: Combines typical moderator permissions
+        children:
+            spleefultimate.mod.kick: true
+            spleefultimate.mod.play: true
+            spleefultimate.mod.reset: true
+            spleefultimate.mod.return : true
+            spleefultimate.mod.spectate: true
+            spleefultimate.mod.start: true
+            spleefultimate.mod.stop: true          
+    spleefultimate.*: 
+        description: Grants all permissions for spleefultimate
+        default: op    
+        children:
+            spleefultimate.admin.*: true
+            spleefultimate.mod.freejoin: true
+            spleefultimate.mod.kick: true
+            spleefultimate.player.play: true
+            spleefultimate.mod.reset: true
+            spleefultimate.player.return : true
+            spleefultimate.mod.save: true
+            spleefultimate.player.spectate: true
+            spleefultimate.mod.start: true
+            spleefultimate.mod.start.single: true
+            spleefultimate.mod.stop: true  

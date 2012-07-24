@@ -4,32 +4,35 @@ import java.util.Hashtable;
 import java.util.Set;
 import java.util.Vector;
 
-import com.spleefultimate.util.LogHelper;
 
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.configuration.ConfigurationSection;
 
+import com.skitscape.spleefultimate.util.LogHelper;
+
 public class SpleefArena
 {
-  private Hashtable<Object, Selection> spleefRegions;
-  private Hashtable<Object, Selection> ignoredRegions;
-  private Hashtable<Object, Selection> loseRegions;
-  private BlockState[] arenaState;
+	//TODO: Decide what type of selection to use, depending on using WorldEdit or not
+  private Hashtable<Object, Selection> spleefRegions_;
+  private Hashtable<Object, Selection> ignoredRegions_;
+  private Hashtable<Object, Selection> loseRegions_;
+  private BlockState[] arenaState_;
   private World world;
 
   public SpleefArena()
   {
-    this.spleefRegions = new Hashtable();
-    this.loseRegions = new Hashtable();
-    this.ignoredRegions = new Hashtable();
+    this.spleefRegions_ = new Hashtable();
+    this.loseRegions_ = new Hashtable();
+    this.ignoredRegions_ = new Hashtable();
   }
 
   public boolean containsSpleefBlock(Block block)
   {
+	//TODO: Decide what type of selection to use, depending on using WorldEdit or not  
 	 
-    for (Selection cuboid : this.spleefRegions.values())
+    for (Selection cuboid : this.spleefRegions_.values())
     {
       if ((cuboid.containsBlock(block)) && 
         (!containsIgnoredBlock(block))) {
@@ -41,7 +44,8 @@ public class SpleefArena
 
   public boolean containsLoseBlock(Block block)
   {
-    for (Selection cuboid : this.loseRegions.values())
+	  //TODO: Decide what type of selection to use, depending on using WorldEdit or not
+    for (Selection cuboid : this.loseRegions_.values())
     {
       if ((cuboid.containsBlock(block)) && 
         (!containsIgnoredBlock(block))) {
@@ -53,7 +57,8 @@ public class SpleefArena
 
   public boolean containsIgnoredBlock(Block block)
   {
-    for (Selection cuboid : this.ignoredRegions.values())
+		//TODO: Decide what type of selection to use, depending on using WorldEdit or not
+    for (Selection cuboid : this.ignoredRegions_.values())
     {
       if (cuboid.containsBlock(block)) {
         return true;
@@ -64,33 +69,35 @@ public class SpleefArena
 
   public boolean hasSpleefRegion(Object regionName)
   {
-    return this.spleefRegions.containsKey(regionName);
+    return this.spleefRegions_.containsKey(regionName);
   }
 
   public boolean hasLoseRegion(Object regionName)
   {
-    return this.loseRegions.containsKey(regionName);
+    return this.loseRegions_.containsKey(regionName);
   }
 
   public boolean hasIgnoredRegion(Object regionName)
   {
-    return this.ignoredRegions.containsKey(regionName);
+    return this.ignoredRegions_.containsKey(regionName);
   }
 
   public void addSpleefRegion(Object regionName, Selection region)
   {
+	//TODO: Decide what type of selection to use, depending on using WorldEdit or not
     Selection regionClone = new Selection(region);
 
     if (!hasSpleefRegion(regionName))
-      this.spleefRegions.put(regionName, regionClone);
+      this.spleefRegions_.put(regionName, regionClone);
   }
 
   public void addLoseRegion(Object regionName, Selection region)
   {
+		//TODO: Decide what type of selection to use, depending on using WorldEdit or not
     Selection regionClone = new Selection(region);
 
     if (!hasLoseRegion(regionName))
-      this.loseRegions.put(regionName, regionClone);
+      this.loseRegions_.put(regionName, regionClone);
   }
 
   public void addIgnoredRegion(Object regionName, Selection region)
@@ -98,58 +105,59 @@ public class SpleefArena
     Selection regionClone = new Selection(region);
 
     if (!hasIgnoredRegion(regionName))
-      this.ignoredRegions.put(regionName, regionClone);
+      this.ignoredRegions_.put(regionName, regionClone);
   }
 
   public void removeSpleefRegion(Object regionName)
   {
     if (hasSpleefRegion(regionName))
-      this.spleefRegions.remove(regionName);
+      this.spleefRegions_.remove(regionName);
   }
 
   public void removeLoseRegion(Object regionName)
   {
     if (hasLoseRegion(regionName))
-      this.loseRegions.remove(regionName);
+      this.loseRegions_.remove(regionName);
   }
 
   public void removeIgnoredRegion(Object regionName)
   {
     if (hasIgnoredRegion(regionName))
-      this.ignoredRegions.remove(regionName);
+      this.ignoredRegions_.remove(regionName);
   }
 
   public int getSpleefRegionNumber()
   {
-    return this.spleefRegions.size();
+    return this.spleefRegions_.size();
   }
 
   public int getLoseRegionNumber()
   {
-    return this.loseRegions.size();
+    return this.loseRegions_.size();
   }
 
   public void saveState()
   {
-    Vector<Block> arenaStateList = new Vector<Block>();
-    for (Selection spleefRegion : this.spleefRegions.values())
+    Vector arenaStateList = new Vector();
+	//TODO: Decide what type of selection to use, depending on using WorldEdit or not
+    for (Selection spleefRegion : this.spleefRegions_.values())
     {
       for (Block spleefBlock : spleefRegion.getSelectedBlocks())
       {
         if (!containsIgnoredBlock(spleefBlock)) {
-          arenaStateList.add((Block) spleefBlock.getState());
+          arenaStateList.add(spleefBlock.getState());
         }
       }
     }
 
-    this.arenaState = ((BlockState[])arenaStateList.toArray(new BlockState[0]));
+    this.arenaState_ = ((BlockState[])arenaStateList.toArray(new BlockState[0]));
   }
 
   public void restoreState()
   {
-    if (this.arenaState != null)
+    if (this.arenaState_ != null)
     {
-      for (BlockState blockState : this.arenaState)
+      for (BlockState blockState : this.arenaState_)
       {
         blockState.update(true);
       }
@@ -171,6 +179,7 @@ public class SpleefArena
       {
         for (Object name : spleefRegionNames)
         {
+        	//TODO: Decide what type of selection to use, depending on using WorldEdit or not
           Selection cuboid = new Selection(world);
 
           if (cuboid.load(childSection.getConfigurationSection((String) name)))
@@ -187,7 +196,7 @@ public class SpleefArena
 
     if (childSection != null)
     {
-      Set<String> loseRegionNames = childSection.getKeys(false);
+      Set loseRegionNames = childSection.getKeys(false);
       if (loseRegionNames != null)
       {
         for (Object name : loseRegionNames)
@@ -209,7 +218,7 @@ public class SpleefArena
 
     if (childSection != null)
     {
-      Set<String> ignoredRegionNames = childSection.getKeys(false);
+      Set ignoredRegionNames = childSection.getKeys(false);
       if (ignoredRegionNames != null)
       {
         for (Object name : ignoredRegionNames)
@@ -236,10 +245,11 @@ public class SpleefArena
     {
       ConfigurationSection childSection = parentSection.createSection("spleefregions");
 
-      for (Object regionName : this.spleefRegions.keySet())
+      for (Object regionName : this.spleefRegions_.keySet())
       {
         ConfigurationSection regionSection = childSection.createSection((String) regionName);
-        Selection cuboid = (Selection)this.spleefRegions.get(regionName);
+    	//TODO: Decide what type of selection to use, depending on using WorldEdit or not
+        Selection cuboid = (Selection)this.spleefRegions_.get(regionName);
 
         cuboid.save(regionSection);
       }
@@ -250,25 +260,26 @@ public class SpleefArena
     {
       ConfigurationSection childSection = parentSection.createSection("loseregions");
 
-      for (Object regionName : this.loseRegions.keySet())
+      for (Object regionName : this.loseRegions_.keySet())
       {
         ConfigurationSection regionSection = childSection.createSection((String) regionName);
-        Selection cuboid = (Selection)this.loseRegions.get(regionName);
+    	//TODO: Decide what type of selection to use, depending on using WorldEdit or not
+        Selection cuboid = (Selection)this.loseRegions_.get(regionName);
 
         cuboid.save(regionSection);
       }
 
     }
 
-    if (this.ignoredRegions.size() != 0)
+    if (this.ignoredRegions_.size() != 0)
     {
       ConfigurationSection childSection = parentSection.createSection("ignoredregions");
 
-      for (Object regionName : this.ignoredRegions.keySet())
+      for (Object regionName : this.ignoredRegions_.keySet())
       {
         ConfigurationSection regionSection = childSection.createSection((String) regionName);
 
-        Selection cuboid = (Selection)this.ignoredRegions.get(regionName);
+        Selection cuboid = (Selection)this.ignoredRegions_.get(regionName);
 
         cuboid.save(regionSection);
       }

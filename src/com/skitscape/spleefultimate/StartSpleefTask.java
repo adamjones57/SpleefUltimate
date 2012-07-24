@@ -20,7 +20,7 @@ public class StartSpleefTask extends TimerTask {
 		if(remaining < 1) {
 		    Logger.getLogger("Minecraft").info("Activating!");
 			game.setCounting(Boolean.valueOf(false));
-			game.getFormerPlayers().clear();
+			game.getFormerPlayers_().clear();
 			game.getArena().saveState();
 			game.setActive(Boolean.valueOf(true));
 		} else {
@@ -32,10 +32,16 @@ public class StartSpleefTask extends TimerTask {
 				}
 				game.setCounting(Boolean.valueOf(true));
 			}
+			if(remaining == 1) {
+				game.start();
+			}
 		    Logger.getLogger("Minecraft").info("Informing players");
 			game.tellActivePlayers(ChatColor.GREEN + "Game starting in " + new Integer(remaining).toString() + " seconds");
 			Timer timer = new Timer();
 			timer.schedule(new StartSpleefTask(remaining-1, game), 1000);
 		}
 	}
-}
+
+
+	}
+
