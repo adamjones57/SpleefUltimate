@@ -2,6 +2,7 @@ package com.skitscape.spleefultimate.commands;
 
 
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.skitscape.spleefultimate.GameManager;
@@ -66,8 +67,7 @@ public class StartCommand extends SubCommand
         return true;
       }
   	StartSpleefTask start = new StartSpleefTask(5, game);
-      start.run();
-      
+      start.run();      
       //game.start();
 
       game.tellActivePlayers(MessageFormatter.format(Messages.getMessage("announce-player_startedgame"), "{PLAYER}", player.getDisplayName()), player);

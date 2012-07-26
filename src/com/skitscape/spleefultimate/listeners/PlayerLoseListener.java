@@ -34,11 +34,12 @@ public class PlayerLoseListener implements Listener
     }*/
 
     Location location = player.getLocation();
+    
+    double ycord = location.getY();
+    ycord--;
+    location.setY(ycord);
 
     Block block = location.getBlock();
-    int ycord = block.getY();
-   // ycord++;
-   // ((Location) block).setY(ycord);
 
     if (game.getArena().containsLoseBlock(block))
     {

@@ -69,7 +69,8 @@ public class GameManager
     games_.remove(oldId);
   }
 
-  public static void loadGames(ConfigurationSection parentSection)
+  @SuppressWarnings("unused")
+public static void loadGames(ConfigurationSection parentSection)
   {
     if (parentSection == null) {
       return;
@@ -87,8 +88,20 @@ public class GameManager
       game.load(parentSection.getConfigurationSection((String) name));
 
       games_.put((String) name, game);
+	  if (parentSection == null) {
+	      }
+
+	      Map<String, Object> gameName = parentSection.getValues(false);
+
+	      if ((gameName == null) || (gameName.size() != 1)) {
+	        return;
+	      }
+	      if(games_.containsKey(gameName.get("name"))) {
+	    	  defaultGame = games_.get((String) gameName.get("name"));
+	    	  defaultGameName = (String) gameName.get("name");
+	      }
+	  }
     }
-  }
 
   public static void saveGames(ConfigurationSection parentSection)
   {
